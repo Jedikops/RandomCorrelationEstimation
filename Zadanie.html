@@ -1,0 +1,67 @@
+<div class="container maxwidth">
+    <div class="row generatorrow">
+        <div id="GeneratorSelectorContainer" class="generatorselector">
+            <label>Rozkład:</label>
+            <div class="dropdown generatorselectordropdown">
+                <button class="btn btn-default dropdown-toggle " type="button" data-toggle="dropdown">
+                    {{GeneratorSelector.name}}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="menu1">
+                    <li ng-click="SelectGenerator('Poissona', 'poisson')"><a href="#">Poissona</a></li>
+                    <li ng-click="SelectGenerator('Gaussa', 'gaussian')"><a href="#">Gaussa</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="generatorforms" ng-switch on="GeneratorSelector.value">
+            <div class="row">
+                <div ng-switch-when="poisson" id="PossionGeneratorForm" class="form-group animate-switch form-inline">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
+                        <label>Lambda: </label><input type="text" class="form-control inputctrl" ng-model="PoissonValues.Lambda" data-toggle="tooltip" title="Parametr rozkładu Poissona. Zakres: 0-20" />
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
+                        <label>Rozmiar: </label><input type="text" class="form-control inputctrl" ng-model="PoissonValues.Rozmiar" data-toggle="tooltip" title="Rozmiar tablicy. Zakres: 20000-100000" />
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
+                        <label>Odstep: </label><input type="text" class="form-control inputctrl" ng-model="PoissonValues.Odstep" data-toggle="tooltip" title="Wybór co którą liczę brać. Zakres: 2-10" />
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
+                        <button class="btn btn-default startbtn" ng-click="Start('poisson')">Start</button>
+                    </div>
+                </div>
+                <div ng-switch-when="gaussian" id="GaussianGeneratorForm" class="form-group animate-switch form-inline">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
+                        <label>Środek: </label><input type="text" class="form-control inputctrl" ng-model="GaussianValues.Srodek" />
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
+                        <label>Odchylenie: </label><input type="text" class="form-control inputctrl" ng-model="GaussianValues.Odchylenie" />
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
+                        <label>Rozmiar: </label><input type="text" class="form-control inputctrl" ng-model="GaussianValues.Rozmiar" data-toggle="tooltip" title="Rozmiar tablicy. Zakres: 20000-100000" />
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
+                        <label>Odstep: </label><input type="text" class="form-control inputctrl" ng-model="GaussianValues.Odstep" data-toggle="tooltip" title="Wybór co którą liczę brać. Zakres: 2-10" />
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
+                        <button class="btn btn-default startbtn" ng-click="Start('gaussian')">Start</button>
+                    </div>
+                    
+                </div>
+            </div>
+            <div id="validationSummary" ng-show="ValidationSummary.IsVisible" class="fadein fadeout validationSummary">
+                {{ValidationSummary.Text}}
+            </div>
+        </div>
+    </div>
+    <div id="row resultsrow" ng-cloak>
+        <div id="container" style="width: 75%;">
+            <canvas id="canvas"></canvas>
+        </div>
+        <script>
+      
+        </script>
+    </div>
+</div>
+<div id="overlay" class="overlay" ng-show="Overlay">
+    <span>Please wait...</span>
+</div>

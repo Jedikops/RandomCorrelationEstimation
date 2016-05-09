@@ -6,14 +6,17 @@ siteApp.controller('ctrl', ['$scope', function ($scope) {
     $scope.PoissonForm = { IsVisible: true }
     $scope.InnyForm = { IsVisible: false }
     $scope.Overlay = false;
+    $scope.ResultHide = true;
     $scope.PoissonValues = { Lambda: 1, Odstep: 2, Rozmiar: 20000, MinValue: Math.pow(10, -12) };
     $scope.GaussianValues = { Srodek: 0, Odchylenie: 1, Rozmiar: 20000, Odstep: 2 };
+    $scope.Temp = {};
+    $scope.Result = {}
 
     $scope.DrawChart = function (results) {
         var barChartData = {
             labels: results.Labels,
             datasets: [{
-                label: 'Estymator korelacji',
+                label: 'Ilość estymatorów korelacji',
                 backgroundColor: "rgba(255,0,0,0.5)",
                 data: results.Values
             }]
@@ -39,7 +42,7 @@ siteApp.controller('ctrl', ['$scope', function ($scope) {
                 },
                 responsive: true,
                 legend: {
-                    position: 'top',
+                    position: 'top'
                 },
                 title: {
                     display: true,
@@ -70,16 +73,27 @@ siteApp.controller('ctrl', ['$scope', function ($scope) {
     }
 
     $scope.Start = function (rozklad) {
+
         if (rozklad == 'poisson') {
             if ($scope.ValidatePoissonValues()) {
-                $scope.ValidationSummary.IsVisible = false;
-                $scope.Overlay = true;
+                $scope.PrepareToOperation();
+
                 setTimeout(function () {
                     var estimators = [];
+                    var sumToAverage = 0;
                     for (var i = 0; i < 10000; i++) {
                         var randomValuesArray = $scope.GeneratePoissonRandomValues();
-                        estimators.push($scope.ExploreEstimator(randomValuesArray, $scope.PoissonValues.Odstep));
+                        var estimator = $scope.ExploreEstimator(randomValuesArray, $scope.PoissonValues.Odstep);
+
+                        sumToAverage = sumToAverage + estimator;
+
+                        $scope.SetOrNotSetMinimumOrMaximum(estimator);
+
+                        estimators.push(estimator);
                     }
+                    var average = $scope.SetAverage(sumToAverage, 10000);
+                    $scope.SetDeviation(estimators, average);
+                    $scope.UpdateResults();
                     $scope.DrawChart($scope.BuildHistogramData(estimators));
                     $scope.$apply(function () {
                         $scope.Overlay = false;
@@ -92,16 +106,23 @@ siteApp.controller('ctrl', ['$scope', function ($scope) {
         }
         else if (rozklad == 'gaussian') {
             if ($scope.ValidateGaussianValues()) {
-                $scope.ValidationSummary.IsVisible = false;
-                $scope.Overlay = true;
-                var estimators = [];
+                $scope.PrepareToOperation();
+
                 setTimeout(function () {
-                    $scope.CorrelationResults = [];
+                    var estimators = [];
+                    var sumToAverage = 0;
                     for (var i = 0; i < 10000; i++) {
                         var randomValuesArray = $scope.GenerateGaussianRandomValues();
-                        estimators.push($scope.ExploreEstimator(randomValuesArray, $scope.GaussianValues.Odstep));
-                    }
+                        var estimator = $scope.ExploreEstimator(randomValuesArray, $scope.GaussianValues.Odstep);
+                        sumToAverage = sumToAverage + estimator;
 
+                        $scope.SetOrNotSetMinimumOrMaximum(estimator);
+
+                        estimators.push(estimator);
+                    }
+                    var average = $scope.SetAverage(sumToAverage, 10000);
+                    $scope.SetDeviation(estimators, average);
+                    $scope.UpdateResults();
                     $scope.DrawChart($scope.BuildHistogramData(estimators));
 
                     $scope.$apply(function () {
@@ -113,6 +134,44 @@ siteApp.controller('ctrl', ['$scope', function ($scope) {
             else
                 $scope.ValidationSummary = { IsVisible: true, Text: "Rozmiar musi znajdować się w zakresie od 20000 do 2000000.\nOdstep musi znajdować sie w zakresie od 2 do 10." };
         }
+    }
+
+    $scope.PrepareToOperation = function () {
+        $scope.ResultHide = true;
+        $scope.ValidationSummary.IsVisible = false;
+        $scope.Overlay = true;
+        $scope.Tmp = {};
+        $scope.Result = {};
+    }
+
+    $scope.UpdateResults = function () {
+        $scope.Result.Minimum = $scope.Temp.Minimum;
+        $scope.Result.Maximum = $scope.Temp.Maximum;
+        $scope.Result.Average = $scope.Temp.Average;
+        $scope.Result.Deviation = $scope.Temp.Deviation;
+        $scope.ResultHide = false;
+    }
+
+    $scope.SetDeviation = function (estimators, average) {
+        var sumToDeviation = 0;
+        for (var i in estimators) {
+            sumToDeviation += estimators[i] - average;
+        }
+        $scope.Temp.Deviation = Math.sqrt(sumToDeviation / 9999);
+    }
+
+
+    $scope.SetAverage = function (counter, denominator) {
+        $scope.Temp.Average = counter / denominator;
+        return $scope.Temp.Average;
+    }
+
+    $scope.SetOrNotSetMinimumOrMaximum = function (value) {
+        if (!($scope.Temp.Minimum != null && $scope.Temp.Minimum <= value))
+            $scope.Temp.Minimum = value;
+
+        if (!($scope.Temp.Maximum != null && $scope.Temp.Maximum >= value))
+            $scope.Temp.Maximum = value;
     }
 
     $scope.ValidatePoissonValues = function () {
@@ -225,4 +284,4 @@ siteApp.controller('ctrl', ['$scope', function ($scope) {
     $scope.gen_gaussion_boxmuller = function (mean, std) {
         return Math.sqrt(-2 * Math.log(Math.random())) * Math.sin(2 * Math.PI * Math.random()) * std + mean;
     }
-}]);
+} ]);

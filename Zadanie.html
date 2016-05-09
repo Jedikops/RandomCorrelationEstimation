@@ -1,6 +1,6 @@
 <div class="container maxwidth">
     <div class="row generatorrow">
-        <div id="GeneratorSelectorContainer" class="generatorselector">
+        <div id="GeneratorSelectorContainer container" class="generatorselector">
             <label>Rozkład:</label>
             <div class="dropdown generatorselectordropdown">
                 <button class="btn btn-default dropdown-toggle " type="button" data-toggle="dropdown">
@@ -16,36 +16,39 @@
         <div class="generatorforms" ng-switch on="GeneratorSelector.value">
             <div class="row">
                 <div ng-switch-when="poisson" id="PossionGeneratorForm" class="form-group animate-switch form-inline">
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
                         <label>Lambda: </label><input type="text" class="form-control inputctrl" ng-model="PoissonValues.Lambda" data-toggle="tooltip" title="Parametr rozkładu Poissona. Zakres: 0-20" />
                     </div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
                         <label>Rozmiar: </label><input type="text" class="form-control inputctrl" ng-model="PoissonValues.Rozmiar" data-toggle="tooltip" title="Rozmiar tablicy. Zakres: 20000-100000" />
                     </div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
                         <label>Odstep: </label><input type="text" class="form-control inputctrl" ng-model="PoissonValues.Odstep" data-toggle="tooltip" title="Wybór co którą liczę brać. Zakres: 2-10" />
                     </div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
                         <button class="btn btn-default startbtn" ng-click="Start('poisson')">Start</button>
                     </div>
                 </div>
                 <div ng-switch-when="gaussian" id="GaussianGeneratorForm" class="form-group animate-switch form-inline">
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
                         <label>Środek: </label><input type="text" class="form-control inputctrl" ng-model="GaussianValues.Srodek" />
                     </div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
-                        <label>Odchylenie: </label><input type="text" class="form-control inputctrl" ng-model="GaussianValues.Odchylenie" />
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4"><label>Odchylenie: </label></div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                        <input type="text" class="form-control inputctrl" ng-model="GaussianValues.Odchylenie" />
                     </div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
-                        <label>Rozmiar: </label><input type="text" class="form-control inputctrl" ng-model="GaussianValues.Rozmiar" data-toggle="tooltip" title="Rozmiar tablicy. Zakres: 20000-100000" />
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4"> <label>Rozmiar: </label></div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                       <input type="text" class="form-control inputctrl" ng-model="GaussianValues.Rozmiar" data-toggle="tooltip" title="Rozmiar tablicy. Zakres: 20000-100000" />
                     </div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
-                        <label>Odstep: </label><input type="text" class="form-control inputctrl" ng-model="GaussianValues.Odstep" data-toggle="tooltip" title="Wybór co którą liczę brać. Zakres: 2-10" />
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4"><label>Odstep: </label></div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4">
+                        <input type="text" class="form-control inputctrl" ng-model="GaussianValues.Odstep" data-toggle="tooltip" title="Wybór co którą liczę brać. Zakres: 2-10" />
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
                         <button class="btn btn-default startbtn" ng-click="Start('gaussian')">Start</button>
                     </div>
-                    
+
                 </div>
             </div>
             <div id="validationSummary" ng-show="ValidationSummary.IsVisible" class="fadein fadeout validationSummary">
@@ -53,13 +56,26 @@
             </div>
         </div>
     </div>
-    <div id="row resultsrow" ng-cloak>
-        <div id="container" style="width: 75%;">
+    <div id="row resultsrow" ng-cloak ng-hide="ResultHide">
+        <div id="container">
             <canvas id="canvas"></canvas>
         </div>
-        <script>
-      
-        </script>
+        <div id="container">
+            <br />
+            <div class="col-lg-6 col-md-6 col-sm-6 col-cs-8">
+                <label>Minimum: </label><label id="minimum">{{Result.Minimum}}</label>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-cs-8">
+                <label>Maksimum: </label><label id="maksimum">{{Result.Maximum}}</label>
+            </div>
+            <br />
+            <div class="col-lg-6 col-md-6 col-sm-6 col-cs-8">
+                <label>Średnia: </label><label id="srednia">{{Result.Average}}</label>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-cs-8">
+                <label>Odchylenie standardowe: </label><label id="odchyleniestandardowe">{{Result.Deviation}}</label>
+            </div>
+        </div>
     </div>
 </div>
 <div id="overlay" class="overlay" ng-show="Overlay">

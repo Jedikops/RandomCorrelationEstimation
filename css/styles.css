@@ -19,18 +19,19 @@ canvas {
     transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
 }
 
-    .fadein.ng-hide-remove, .fadeout.ng-hide-add.ng-hide-add-active {
-        opacity: 0;
-        display: block !important;
-    }
+.fadein.ng-hide-remove, .fadeout.ng-hide-add.ng-hide-add-active {
+    opacity: 0;
+    display: block !important;
+}
 
-        .fadeout.ng-hide-add, .fadein.ng-hide-remove.ng-hide-remove-active {
-            opacity: 1;
-            display: block !important;
-        }
+.fadeout.ng-hide-add, .fadein.ng-hide-remove.ng-hide-remove-active {
+    opacity: 1;
+    display: block !important;
+}
 
 .animate-switch {
     position: absolute;
+    width: 95%;
     min-width: 200px;
     max-width: 800px;
     -webkit-transition: 0.5s linear all;
@@ -38,24 +39,24 @@ canvas {
     transition-delay: 0.5s;
 }
 
-    .animate-switch.ng-enter {
-        opacity: 0;
-    }
+.animate-switch.ng-enter {
+    opacity: 0;
+}
 
-    .animate-switch.ng-enter-active {
-        opacity: 1;
-    }
+.animate-switch.ng-enter-active {
+    opacity: 1;
+}
 
-    .animate-switch.ng-leave {
-        opacity: 1;
-    }
+.animate-switch.ng-leave {
+    opacity: 1;
+}
 
-    .animate-switch.ng-leave-active {
-        opacity: 0;
-    }
+.animate-switch.ng-leave-active {
+    opacity: 0;
+}
 
 .inputctrl {
-    max-width: 100px;
+    max-width: 75px;
 }
 
 .generatorselector {
@@ -69,25 +70,31 @@ canvas {
     width: 100%;
     height: 100%;
     text-align: center;
-    
     filter: alpha(opacity=50);
     -moz-opacity: 1;
     opacity: 1;
 }
 
-    .overlay span {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        padding: 15px;
-        border-radius:5px;
-        border: solid 1px #e7e7e7;
-        background: #eee;
-        margin-left:-25px;
-    }
+.overlay span {
+    position: absolute;
+    width: 150px;
+    height: 50px;
+    top: 50%;
+    left: 50%;
+    padding: 15px;
+    border-radius: 5px;
+    border: solid 1px #e7e7e7;
+    background: #eee;
+    margin-left: -75px;
+    margin-top: -25px;
+}
 
+.centerme{
+    text-align: center;
+}
 .startbtn {
     margin-top: 25px;
+    width: 75px;
 }
 
 .validationSummary {
@@ -112,7 +119,13 @@ canvas {
 }
 
 @media (max-width: 767px) {
+     .generatorrow {
+        height: 200px;
+    }
 }
 
 @media (max-width: 480px) {
+    .generatorrow {
+        height: 200px;
+    }
 }

@@ -54,22 +54,22 @@
         </div>
     </div>
     <div id="row resultsrow" ng-cloak ng-hide="ResultHide">
-        <div id="container">
+        <div class="container chartcontainer">
             <canvas id="canvas"></canvas>
         </div>
         <br />
-        <div id="container">
+        <div class="container resultscontainer">
             <div class="col-lg-6 col-md-6 col-sm-6 col-cs-8">
-                <label>Minimum: </label><label id="minimum">{{Result.Minimum}}</label>
+                <label>Minimum: </label><p id="minimum">{{Result.Minimum}}</p>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-cs-8">
-                <label>Maksimum: </label><label id="maksimum">{{Result.Maximum}}</label>
+                <label>Maksimum: </label><p id="maksimum">{{Result.Maximum}}</p>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-cs-8">
-                <label>Średnia: </label><label id="srednia">{{Result.Average}}</label>
+                <label>Średnia: </label><p id="srednia">{{Result.Average}}</p>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-cs-8">
-                <label>Odchylenie standardowe: </label><label id="odchyleniestandardowe">{{Result.Deviation}}</label>
+                <label>Odchylenie standardowe: </label><p id="odchyleniestandardowe">{{Result.Deviation}}</p>
             </div>
         </div>
     </div>

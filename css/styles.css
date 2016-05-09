@@ -109,12 +109,18 @@ canvas {
         margin-right: 30px;
         float: right;
     }
+.animate-switch {
+        width: 85%;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 1200px) {
     .generatorselector {
         margin-right: 30px;
         float: right;
+    }
+.animate-switch {
+        width: 85%;
     }
 }
 

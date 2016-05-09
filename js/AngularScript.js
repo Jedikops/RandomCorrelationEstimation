@@ -16,7 +16,7 @@ siteApp.controller('ctrl', ['$scope', function ($scope) {
         var barChartData = {
             labels: results.Labels,
             datasets: [{
-                label: 'Ilość estymatorów korelacji',
+                label: 'Estymatory korelacji',
                 backgroundColor: "rgba(255,0,0,0.5)",
                 data: results.Values
             }]
@@ -127,7 +127,6 @@ siteApp.controller('ctrl', ['$scope', function ($scope) {
 
                     $scope.$apply(function () {
                         $scope.Overlay = false;
-                        $scope.DrawChart();
                     });
                 }, 100);
             }

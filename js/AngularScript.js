@@ -157,7 +157,7 @@ siteApp.controller('ctrl', ['$scope', function ($scope) {
         for (var i in estimators) {
             sumToDeviation += estimators[i] - average;
         }
-        $scope.Temp.Deviation = Math.sqrt(sumToDeviation / 9999);
+        $scope.Temp.Deviation = Math.sqrt(sumToDeviation / 10000);
     }
 
 

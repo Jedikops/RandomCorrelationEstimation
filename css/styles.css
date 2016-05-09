@@ -31,7 +31,6 @@ canvas {
 
 .animate-switch {
     position: absolute;
-    width: 95%;
     min-width: 200px;
     max-width: 800px;
     -webkit-transition: 0.5s linear all;
@@ -89,9 +88,10 @@ canvas {
     margin-top: -25px;
 }
 
-.centerme{
+.centerme {
     text-align: center;
 }
+
 .startbtn {
     margin-top: 25px;
     width: 75px;
@@ -119,13 +119,21 @@ canvas {
 }
 
 @media (max-width: 767px) {
-     .generatorrow {
+    .generatorrow {
         height: 200px;
+    }
+
+    .animate-switch {
+        width: 95%;
     }
 }
 
 @media (max-width: 480px) {
     .generatorrow {
         height: 200px;
+    }
+
+    .animate-switch {
+        width: 95%;
     }
 }

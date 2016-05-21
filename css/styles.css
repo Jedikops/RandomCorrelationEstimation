@@ -88,10 +88,11 @@ canvas {
     margin-top: -25px;
 }
 
-.chartcontainer{
+.chartcontainer {
     max-width: 700px;
 }
-.resultscontainer{
+
+.resultscontainer {
     max-width: 700px;
 }
 
@@ -116,9 +117,18 @@ canvas {
         margin-right: 30px;
         float: right;
     }
-.animate-switch {
+
+    .animate-switch {
         width: 85%;
     }
+}
+
+.generatorrow {
+    margin-top: 25px;
+}
+
+.maxwidth {
+    max-width: 95%;
 }
 
 @media (min-width: 768px) and (max-width: 1200px) {
@@ -126,7 +136,8 @@ canvas {
         margin-right: 30px;
         float: right;
     }
-.animate-switch {
+
+    .animate-switch {
         width: 85%;
     }
 }

@@ -1,6 +1,5 @@
 var siteApp = angular.module('siteApp', ['ngAnimate']);
 siteApp.controller('ctrl', ['$scope', function ($scope) {
-    $scope.NavigationSelector = 'zadanie';
     $scope.GeneratorSelector = { name: 'Poissona', value: 'poisson' };
     $scope.ValidationSummary = { IsVisible: false, Text: "" };
     $scope.PoissonForm = { IsVisible: true }
@@ -139,7 +138,7 @@ siteApp.controller('ctrl', ['$scope', function ($scope) {
         $scope.ResultHide = true;
         $scope.ValidationSummary.IsVisible = false;
         $scope.Overlay = true;
-        $scope.Tmp = {};
+        $scope.Temp = {};
         $scope.Result = {};
     }
 
